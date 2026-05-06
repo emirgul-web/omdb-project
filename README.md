@@ -41,13 +41,6 @@ Built with plain HTML, CSS and JavaScript — no frameworks, no build step.
 3. Under "Source" select the `master` branch and `/root` folder.
 4. Your site will be live at `https://<username>.github.io/omdb-project/`.
 
-## Screenshots
-
-### Search Results
-![Search results](screenshots/search-results.png)
-
-### Movie Detail
-![Movie detail modal](screenshots/movie-detail.png)
 
 ## Notes
 
