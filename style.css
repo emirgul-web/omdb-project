@@ -1,0 +1,485 @@
+/* =============================================
+   MovieFinder – Main Stylesheet
+   ============================================= */
+
+/* ---------- reset & base ---------- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background: #0f0f14;
+    color: #e2e2e8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+a {
+    color: #6ea8fe;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- header ---------- */
+#site-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 28px 24px 18px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+#logo {
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #fff;
+}
+
+.tagline {
+    font-size: 0.82rem;
+    color: #888;
+    margin-top: 4px;
+}
+
+/* ---------- api key bar ---------- */
+#api-key-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: #161620;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    flex-wrap: wrap;
+}
+
+#api-key-bar label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #aaa;
+}
+
+#api-key-input {
+    width: 260px;
+    padding: 7px 12px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background: #1e1e2d;
+    color: #ddd;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#api-key-input:focus {
+    border-color: #6ea8fe;
+}
+
+#save-key-btn {
+    padding: 7px 18px;
+    background: #2d5aa0;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+#save-key-btn:hover {
+    background: #3a6fc4;
+}
+
+#key-status {
+    font-size: 0.8rem;
+    color: #5cb85c;
+}
+
+/* ---------- search section ---------- */
+#search-section {
+    padding: 32px 20px 16px;
+}
+
+.search-box {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#search-input {
+    flex: 1 1 300px;
+    padding: 12px 16px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background: #1e1e2d;
+    color: #eee;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#search-input:focus {
+    border-color: #6ea8fe;
+}
+
+#type-filter, #year-filter {
+    padding: 10px 12px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background: #1e1e2d;
+    color: #ccc;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+#year-filter {
+    width: 90px;
+}
+
+#search-btn {
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s;
+}
+
+#search-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(37,99,235,0.4);
+}
+
+#search-btn:active {
+    transform: translateY(0);
+}
+
+/* ---------- loader ---------- */
+#loader {
+    text-align: center;
+    padding: 40px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255,255,255,0.1);
+    border-top-color: #6ea8fe;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---------- messages ---------- */
+#message-area {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+#message-area.error {
+    background: rgba(220,53,69,0.12);
+    color: #f87171;
+    border: 1px solid rgba(220,53,69,0.25);
+}
+
+#message-area.info {
+    background: rgba(37,99,235,0.1);
+    color: #93c5fd;
+    border: 1px solid rgba(37,99,235,0.2);
+}
+
+/* ---------- results grid ---------- */
+#results-section {
+    flex: 1;
+    padding: 20px;
+}
+
+#results-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* movie card */
+.movie-card {
+    background: #1a1a28;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.25s;
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+.movie-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 26px rgba(0,0,0,0.5);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    background: #252535;
+}
+
+.card-info {
+    padding: 12px 14px;
+}
+
+.card-info h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #f0f0f5;
+    margin-bottom: 4px;
+    /* truncate long titles */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-info span {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* no poster placeholder */
+.no-poster {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    background: #252535;
+    color: #555;
+    font-size: 0.85rem;
+}
+
+/* ---------- pagination ---------- */
+#pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px 20px 32px;
+}
+
+#pagination button {
+    padding: 8px 20px;
+    background: #1e1e2d;
+    color: #ccc;
+    border: 1px solid #333;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+#pagination button:hover:not(:disabled) {
+    background: #2a2a3d;
+}
+
+#pagination button:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+#page-info {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* ---------- modal ---------- */
+#modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#modal {
+    background: #1c1c2c;
+    border-radius: 14px;
+    max-width: 720px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    animation: fadeUp 0.25s ease-out;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+#modal-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1.6rem;
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.15s;
+}
+
+#modal-close:hover {
+    color: #fff;
+}
+
+#modal-body {
+    padding: 28px;
+}
+
+/* detail layout */
+.detail-top {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.detail-poster {
+    width: 220px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.detail-poster img {
+    width: 100%;
+    display: block;
+}
+
+.detail-info {
+    flex: 1;
+}
+
+.detail-info h2 {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+    color: #fff;
+}
+
+.detail-info .meta {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 14px;
+}
+
+.detail-info .meta span + span::before {
+    content: '•';
+    margin: 0 8px;
+    color: #555;
+}
+
+.detail-info .rating-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.rating-badge {
+    background: #252538;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+.rating-badge strong {
+    color: #fbbf24;
+}
+
+.detail-row {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.detail-row strong {
+    color: #aaa;
+}
+
+.plot-text {
+    color: #bbb;
+    line-height: 1.65;
+}
+
+/* ---------- footer ---------- */
+#site-footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.78rem;
+    color: #555;
+    border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+/* ---------- utility ---------- */
+.hidden {
+    display: none !important;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 640px) {
+    #logo { font-size: 1.4rem; }
+
+    #search-input { flex-basis: 100%; }
+
+    .detail-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .detail-poster { width: 180px; }
+
+    .detail-info .rating-row { justify-content: center; }
+
+    #results-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 14px;
+    }
+
+    .movie-card img, .no-poster {
+        height: 220px;
+    }
+
+    #api-key-input { width: 100%; }
+}

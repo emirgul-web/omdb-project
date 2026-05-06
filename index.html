@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Search and explore movie details using the OMDB API. Find titles, directors, genres and more.">
+    <title>MovieFinder – OMDB Search</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- header -->
+    <header id="site-header">
+        <div class="header-inner">
+            <h1 id="logo">🎬 MovieFinder</h1>
+            <p class="tagline">Powered by OMDB&nbsp;API</p>
+        </div>
+    </header>
+
+    <!-- api key setup -->
+    <div id="api-key-bar">
+        <label for="api-key-input">API Key:</label>
+        <input type="text" id="api-key-input" placeholder="Enter your OMDB API key" autocomplete="off">
+        <button id="save-key-btn">Save</button>
+        <span id="key-status"></span>
+    </div>
+
+    <!-- search section -->
+    <section id="search-section">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Search for a movie…" autocomplete="off">
+            <select id="type-filter">
+                <option value="">All Types</option>
+                <option value="movie">Movie</option>
+                <option value="series">Series</option>
+                <option value="episode">Episode</option>
+            </select>
+            <input type="number" id="year-filter" placeholder="Year" min="1900" max="2099">
+            <button id="search-btn">Search</button>
+        </div>
+    </section>
+
+    <!-- loading spinner -->
+    <div id="loader" class="hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- error / info messages -->
+    <div id="message-area" class="hidden"></div>
+
+    <!-- search results -->
+    <section id="results-section">
+        <div id="results-grid"></div>
+    </section>
+
+    <!-- pagination -->
+    <div id="pagination" class="hidden">
+        <button id="prev-btn" disabled>← Prev</button>
+        <span id="page-info"></span>
+        <button id="next-btn">Next →</button>
+    </div>
+
+    <!-- movie detail modal -->
+    <div id="modal-overlay" class="hidden">
+        <div id="modal">
+            <button id="modal-close">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <footer id="site-footer">
+        <p>&copy; 2025 MovieFinder. Data provided by <a href="http://www.omdbapi.com/" target="_blank" rel="noopener">OMDB API</a>.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
