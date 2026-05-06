@@ -5,7 +5,7 @@ Built with plain HTML, CSS and JavaScript — no frameworks, no build step.
 
 ## Live Demo
 
-👉 **[https://yourusername.github.io/omdb-project/](https://yourusername.github.io/omdb-project/)**
+👉 **[https://emirgul-web.github.io/omdb-project/](https://emirgul-web.github.io/omdb-project/)**
 
 ## Features
 
@@ -27,22 +27,27 @@ Built with plain HTML, CSS and JavaScript — no frameworks, no build step.
 ## Project Structure
 
 ```
-├── index.html   # main page
-├── style.css    # all styles
-├── app.js       # application logic
-└── README.md    # this file
+├── index.html       # main page
+├── style.css        # all styles
+├── app.js           # application logic
+├── screenshots/     # readme images
+└── README.md        # this file
 ```
 
 ## Deploying to GitHub Pages
 
 1. Push this repo to GitHub.
 2. Go to **Settings → Pages**.
-3. Under "Source" select the `main` branch and `/root` folder.
+3. Under "Source" select the `master` branch and `/root` folder.
 4. Your site will be live at `https://<username>.github.io/omdb-project/`.
 
 ## Screenshots
 
-*(screenshots will be added after deployment)*
+### Search Results
+![Search results](screenshots/search-results.png)
+
+### Movie Detail
+![Movie detail modal](screenshots/movie-detail.png)
 
 ## Notes
 
