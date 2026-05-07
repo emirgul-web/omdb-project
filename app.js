@@ -7,9 +7,7 @@
     "use strict";
 
     // ---- DOM refs ----
-    const apiKeyInput   = document.getElementById("api-key-input");
-    const saveKeyBtn    = document.getElementById("save-key-btn");
-    const keyStatus     = document.getElementById("key-status");
+
 
     const searchInput   = document.getElementById("search-input");
     const typeFilter    = document.getElementById("type-filter");
@@ -30,7 +28,7 @@
     const modalClose    = document.getElementById("modal-close");
 
     // ---- state ----
-    let apiKey      = "";
+    var apiKey      = "b3661580";
     let currentPage = 1;
     let totalResults = 0;
     let lastQuery   = "";
@@ -42,10 +40,7 @@
 
     // ---- init ----
     function init() {
-        loadApiKey();
         restoreLastSearch();
-
-        saveKeyBtn.addEventListener("click", saveApiKey);
         searchBtn.addEventListener("click", function () { doSearch(1); });
         searchInput.addEventListener("keydown", function (e) {
             if (e.key === "Enter") doSearch(1);
@@ -63,28 +58,7 @@
         });
     }
 
-    // ---- api key helpers ----
-    function loadApiKey() {
-        var saved = localStorage.getItem("omdb_api_key");
-        if (saved) {
-            apiKey = saved;
-            apiKeyInput.value = saved;
-            keyStatus.textContent = "✓ Saved";
-        }
-    }
 
-    function saveApiKey() {
-        var key = apiKeyInput.value.trim();
-        if (!key) {
-            keyStatus.textContent = "Please enter a key";
-            keyStatus.style.color = "#f87171";
-            return;
-        }
-        apiKey = key;
-        localStorage.setItem("omdb_api_key", key);
-        keyStatus.textContent = "✓ Saved";
-        keyStatus.style.color = "#5cb85c";
-    }
 
     // ---- search ----
     function doSearch(page) {
@@ -93,10 +67,7 @@
             showMessage("Please enter a movie name to search.", "info");
             return;
         }
-        if (!apiKey) {
-            showMessage("You need to enter and save your OMDB API key first.", "error");
-            return;
-        }
+
 
         currentPage = page;
         lastQuery = query;
@@ -278,13 +249,11 @@
                 typeFilter.value  = state.type || "";
                 yearFilter.value  = state.year || "";
                 // automatically replay last search
-                if (apiKey) {
                     currentPage = state.page || 1;
                     lastQuery = state.query;
                     lastType  = state.type || "";
                     lastYear  = state.year || "";
                     doSearch(currentPage);
-                }
             }
         } catch (e) {
             // corrupt data, ignore

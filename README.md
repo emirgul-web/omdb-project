@@ -14,15 +14,13 @@ Built with plain HTML, CSS and JavaScript — no frameworks, no build step.
 - **Detail View** – Click any card to see full details: plot, ratings, cast, box office etc.
 - **Pagination** – Navigate through multi-page results easily.
 - **Persistent Search** – Your last search is saved in LocalStorage, so if you refresh the page you pick up where you left off.
-- **Error Handling** – Clear messages for invalid searches, network errors, missing API key and so on.
+- **Error Handling** – Clear messages for invalid searches, network errors and so on.
 - **Responsive** – Works on desktops, tablets and phones.
 
 ## Getting Started
 
-1. Go to [http://www.omdbapi.com/apikey.aspx](http://www.omdbapi.com/apikey.aspx) and get a **free API key**.
-2. Clone this repo and open `index.html` in a browser (or use the deployed GitHub Pages link).
-3. Paste your API key into the "API Key" field at the top and click **Save**.
-4. Start searching!
+1. Clone this repo and open `index.html` in a browser (or use the deployed GitHub Pages link above).
+2. Start searching!
 
 ## Project Structure
 
