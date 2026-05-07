@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Search and explore movie details using the OMDB API. Find titles, directors, genres and more.">
     <title>MovieFinder – OMDB Search</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,15 +14,32 @@
     <!-- header -->
     <header id="site-header">
         <div class="header-inner">
-            <h1 id="logo">🎬 MovieFinder</h1>
-            <p class="tagline">Powered by OMDB&nbsp;API</p>
+            <div class="header-left">
+                <h1 id="logo">🎬 MovieFinder</h1>
+                <p class="tagline">Powered by OMDB&nbsp;API</p>
+            </div>
+            <div class="header-right">
+                <button id="theme-toggle" title="Toggle theme" aria-label="Toggle dark/light mode">
+                    <span class="theme-icon" id="theme-icon">🌙</span>
+                </button>
+            </div>
         </div>
     </header>
 
     <!-- search section -->
     <section id="search-section">
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="Search for a movie…" autocomplete="off">
+        <div class="search-box glass">
+            <div class="search-input-wrapper">
+                <input type="text" id="search-input" placeholder="Search for a movie…" autocomplete="off">
+                <!-- search history dropdown -->
+                <div id="search-history" class="search-history hidden">
+                    <div class="history-header">
+                        <span>Recent Searches</span>
+                        <button id="clear-history-btn" title="Clear history">✕</button>
+                    </div>
+                    <ul id="history-list"></ul>
+                </div>
+            </div>
             <select id="type-filter">
                 <option value="">All Types</option>
                 <option value="movie">Movie</option>
@@ -30,17 +47,45 @@
                 <option value="episode">Episode</option>
             </select>
             <input type="number" id="year-filter" placeholder="Year" min="1900" max="2099">
-            <button id="search-btn">Search</button>
+            <button id="search-btn">
+                <span class="btn-icon">🔍</span>
+                <span>Search</span>
+            </button>
         </div>
     </section>
 
-    <!-- loading spinner -->
-    <div id="loader" class="hidden">
-        <div class="spinner"></div>
+    <!-- empty state -->
+    <div id="empty-state">
+        <div class="empty-illustration">🎞️</div>
+        <h2>Discover Your Next Favorite Movie</h2>
+        <p>Type a movie name above and hit search to explore thousands of titles.</p>
+    </div>
+
+    <!-- loading skeletons -->
+    <div id="skeleton-loader" class="hidden">
+        <div class="skeleton-grid">
+            <div class="skeleton-card"><div class="skeleton-poster pulse"></div><div class="skeleton-info"><div class="skeleton-title pulse"></div><div class="skeleton-year pulse"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-poster pulse"></div><div class="skeleton-info"><div class="skeleton-title pulse"></div><div class="skeleton-year pulse"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-poster pulse"></div><div class="skeleton-info"><div class="skeleton-title pulse"></div><div class="skeleton-year pulse"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-poster pulse"></div><div class="skeleton-info"><div class="skeleton-title pulse"></div><div class="skeleton-year pulse"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-poster pulse"></div><div class="skeleton-info"><div class="skeleton-title pulse"></div><div class="skeleton-year pulse"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-poster pulse"></div><div class="skeleton-info"><div class="skeleton-title pulse"></div><div class="skeleton-year pulse"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-poster pulse"></div><div class="skeleton-info"><div class="skeleton-title pulse"></div><div class="skeleton-year pulse"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-poster pulse"></div><div class="skeleton-info"><div class="skeleton-title pulse"></div><div class="skeleton-year pulse"></div></div></div>
+        </div>
     </div>
 
     <!-- error / info messages -->
     <div id="message-area" class="hidden"></div>
+
+    <!-- favorites bar -->
+    <section id="favorites-section" class="hidden">
+        <div class="favorites-header">
+            <h2>❤️ My Favorites</h2>
+            <button id="toggle-favorites-btn" class="glass-btn">Show</button>
+        </div>
+        <div id="favorites-grid" class="hidden"></div>
+    </section>
 
     <!-- search results -->
     <section id="results-section">
@@ -61,6 +106,9 @@
             <div id="modal-body"></div>
         </div>
     </div>
+
+    <!-- scroll to top -->
+    <button id="scroll-top-btn" class="hidden" title="Back to top" aria-label="Scroll to top">↑</button>
 
     <footer id="site-footer">
         <p>&copy; 2025 MovieFinder. Data provided by <a href="http://www.omdbapi.com/" target="_blank" rel="noopener">OMDB API</a>.</p>

@@ -13,7 +13,14 @@ Built with plain HTML, CSS and JavaScript — no frameworks, no build step.
 - **Filters** – Optionally filter by type (movie / series / episode) and release year.
 - **Detail View** – Click any card to see full details: plot, ratings, cast, box office etc.
 - **Pagination** – Navigate through multi-page results easily.
+- **Favorites** – Click the heart icon on any card to save it to your favorites list (persisted in LocalStorage).
+- **Search History** – Recent searches appear as a dropdown when you focus the search bar.
+- **Dark / Light Mode** – Toggle between dark and light themes using the button in the header.
 - **Persistent Search** – Your last search is saved in LocalStorage, so if you refresh the page you pick up where you left off.
+- **Skeleton Loading** – Smooth skeleton placeholder cards while results are loading.
+- **Card Animations** – Staggered fade-in entrance for search result cards with glow-on-hover effect.
+- **Type & Year Badges** – Each card shows the content type and year as small overlay badges.
+- **Scroll to Top** – A floating button appears when you scroll down to quickly return to the top.
 - **Error Handling** – Clear messages for invalid searches, network errors and so on.
 - **Responsive** – Works on desktops, tablets and phones.
 
@@ -38,7 +45,6 @@ Built with plain HTML, CSS and JavaScript — no frameworks, no build step.
 2. Go to **Settings → Pages**.
 3. Under "Source" select the `master` branch and `/root` folder.
 4. Your site will be live at `https://<username>.github.io/omdb-project/`.
-
 
 ## Notes
 
